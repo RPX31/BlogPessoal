@@ -16,28 +16,38 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_usuario" )
+@Table(name = "tb_usuario")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	
 	@NotBlank(message = "O atributo nome é Obrigatorio!")
 	private String nome;
 	@NotBlank(message = "O atributo usuário é Obrigatorio!")
 	@Email(message = "O atributo usuário deve ser um e_mail válido")
 	private String usuario;
 	@NotBlank(message = "O atributo senha é Obrigatorio!")
-	@Size(min = 8 , message = "O atributo senha deve conter no minimo 8  caracteres")
+	@Size(min = 8, message = "O atributo senha deve conter no minimo 8  caracteres")
 	private String senha;
 	@Size(max = 5000, message = "O atributo foto não pode ser maior que 5000 caracteres")
 	private String foto;
-	
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+
+	public Usuario() {
+	}
 
 	public Long getId() {
 		return id;
@@ -86,6 +96,5 @@ public class Usuario {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-	
+
 }
