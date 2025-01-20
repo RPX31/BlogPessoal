@@ -30,7 +30,7 @@ public class Usuario {
 	
 	@Email(message = "O atributo usuário deve ser um e_mail válido")
 	@Schema(example = "email@email.com.br")
-	@NotNull(message = "O Atributo Usuário é Obrigatório!")
+	@NotBlank(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String usuario;
 	@NotBlank(message = "O atributo senha é Obrigatorio!")
